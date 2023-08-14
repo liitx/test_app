@@ -22,7 +22,7 @@ final class PostLoading extends PostState {
 }
 
 final class PostLoaded extends PostState {
-  final List<PostModel> post;
+  final List<EntityPostModel> post;
   const PostLoaded({required this.post});
   @override
   List<Object> get props => [post];

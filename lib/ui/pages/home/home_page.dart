@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_app/ui/pages/home/cubits/post/post_cubit.dart';
@@ -76,11 +74,8 @@ class HomePage extends StatelessWidget {
                                             ),
                                             ElevatedButton(
                                                 onPressed: () {
-                                                  postContoller.repository
-                                                      .deletePost(
-                                                          state.post.first);
-                                                  log(state.post.first
-                                                      .toString());
+                                                  postContoller
+                                                      .deletePost(e.id);
                                                 },
                                                 child: const Text(
                                                   'Delete',

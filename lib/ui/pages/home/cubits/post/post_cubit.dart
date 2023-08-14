@@ -2,52 +2,51 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:test_app/data/model/post_model.dart';
-import 'package:test_app/data/repository.dart';
+import 'package:test_app/data/model/entity_post_model.dart';
+import 'package:test_app/data/notes_repository.dart';
 
 part 'post_state.dart';
 
 class PostCubit extends Cubit<PostState> {
-  final Repository repository;
+  final NotesRepository notesRepository;
+  int _deletedPostId = 0;
 
-  PostCubit({required this.repository})
+  PostCubit({required this.notesRepository})
       : super(const PostInitial(initialMessage: 'No posts'));
 
-  Future<List<PostModel>?> fetchPost() async {
+  Future<List<EntityPostModel>?> fetchPost() async {
     try {
+      final posts = await notesRepository.fetchPost();
+      if (_deletedPostId >= 0) {
+        posts.removeWhere((postModel) => postModel.id == _deletedPostId);
+      }
       // emit(PostLoading());
       emit(const PostInitial());
       emit(PostLoading());
-      repository.fetchPost().then((posts) {
-        // posts != null
-        if (posts != null) {
-          emit(PostLoaded(post: posts));
-        } else {
-          emit(const PostError(errorMessage: 'Error while loading posts'));
-        }
-      });
+
+      if (posts != null) {
+        emit(PostLoaded(post: posts));
+      } else {
+        emit(const PostError(errorMessage: 'cannot fetch posts'));
+      }
     } catch (e) {
       log('TryCatch000');
       log('PostCubit fetch catch: ${e.toString()}');
-      emit(const PostError(
-          errorMessage: "can't fetch post line 19 post_cubit.dart"));
+      emit(PostError(errorMessage: e.toString()));
     }
     return null;
   }
 
-  Future<String?> deletePost(PostModel post) async {
+  Future<bool> deletePost(int id) async {
     try {
-      emit(PostLoading());
       // emit(PostLoaded(post: post))
+      notesRepository.deletePost(id);
+      _deletedPostId = id;
+      fetchPost();
       log('DELETED POST SUCCESSFUL');
-      repository.fetchPost().then((posts) {
-        if (posts != null) {
-          emit(PostLoaded(post: posts));
-        }
-      });
+      return true;
     } catch (e) {
-      return 'error deleting the post';
+      return false;
     }
-    return null;
   }
 }

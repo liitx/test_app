@@ -1,31 +1,33 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class NetworkService {
   final baseUrl = 'jsonplaceholder.typicode.com';
 
-  Future<List<dynamic>> fetchPost() async {
+  Future<Response> fetchPost() async {
+    late final Response
+        response; // late: it's going to be assigned later, which later it will not be null.
     try {
       final uri = Uri.https(baseUrl, '/posts');
-      final response = await http.get(uri);
-      return jsonDecode(response.body) as List;
+      response = await http.get(uri);
     } catch (e) {
       log('NetworkService fetch catch: ${e.toString()}');
-      return [];
     }
+    return response;
   }
 
-  Future<List<dynamic>> deletePost(String postId) async {
+  Future<Response> deletePost(int id) async {
+    late final Response
+        response; // late: it's going to be assigned later, which later it will not be null.
     try {
-      final uri = Uri.https(baseUrl, '/post/$postId');
-      log(postId.toString());
-      final response = await http.delete(uri);
-      return jsonDecode(response.body) as List;
+      final uri = Uri.https(baseUrl, '/post/$id');
+      log(id.toString());
+      response = await http.delete(uri);
     } catch (e) {
       log('NetworkService delete catch: ${e.toString()}');
-      return [];
     }
+    return response;
   }
 }

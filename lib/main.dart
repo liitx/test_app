@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_app/data/network_service.dart';
-import 'package:test_app/data/repository.dart';
+import 'package:test_app/data/notes_repository.dart';
 import 'package:test_app/ui/pages/home/cubits/post/post_cubit.dart';
 import 'package:test_app/ui/pages/home/home_page.dart';
 
@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Repository repository = Repository(networkService: NetworkService());
+    NotesRepository notesRepository =
+        NotesRepository(networkService: NetworkService());
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: BlocProvider(
-        create: (context) => PostCubit(repository: repository),
+        create: (context) => PostCubit(notesRepository: notesRepository),
         child: const HomePage(),
       ),
     );
