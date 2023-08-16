@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 class NetworkService {
-  final baseUrl = 'jsonplaceholder.typicode.com';
+  // final baseUrl = 'jsonplaceholder.typicode.com';
+  final baseUrl = 'https://api.publicapis.org/entries';
 
   Future<Response> fetchPost() async {
     late final Response

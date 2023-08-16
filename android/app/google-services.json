@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "325048551161",
+    "project_id": "test-liitx",
+    "storage_bucket": "test-liitx.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325048551161:android:3c9b11107bd16f19504428",
+        "android_client_info": {
+          "package_name": "com.example.test_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325048551161-r6ubsld1dk6cu2la26oggsrf1hbltdbg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS1ov2H_on9MUrDdRRCpA5MmdidtbRtUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325048551161-r6ubsld1dk6cu2la26oggsrf1hbltdbg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

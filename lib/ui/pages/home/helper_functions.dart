@@ -36,7 +36,7 @@ buildLoaded({
       ...posts.map((e) => Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
-                height: MediaQuery.sizeOf(context).height * .38,
+                height: MediaQuery.sizeOf(context).height * .39,
                 child: Card(
                     child: Padding(
                   padding: const EdgeInsets.all(8.0),
