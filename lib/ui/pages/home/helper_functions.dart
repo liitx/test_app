@@ -32,10 +32,10 @@ buildLoaded({
   required ItemLoadedState state,
   required ItemCubit itemController,
 }) {
-  final item = (state).item;
+  final items = (state).items;
   return SingleChildScrollView(
     child: Column(children: [
-      Padding(
+      ...items.map((e) => Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
                 height: MediaQuery.sizeOf(context).height * .39,
@@ -44,9 +44,9 @@ buildLoaded({
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Text('ItemId: ${item.itemId.toString()}'),
+                      Text('ItemId: ${e.itemId.toString()}'),
                       const Divider(),
-                      Text('Query: ${item.q.toString()}'),
+                      Text('Query: ${e.q.toString()}'),
                       const Divider(),
                       // Text('TITLE: ${e.title.toString()}'),
                       // const Divider(),
@@ -79,7 +79,7 @@ buildLoaded({
                     ],
                   ),
                 ))),
-          ),
+          )),
     ]),
   );
 }

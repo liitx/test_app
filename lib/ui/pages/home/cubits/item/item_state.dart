@@ -19,11 +19,11 @@ final class ItemLoadingState extends ItemState {}
 
 final class ItemLoadedState extends ItemState {
   // final List<ItemEntity> items;
-    final ItemEntity item;
-  const ItemLoadedState({required this.item});
+    final List<ItemEntity> items;
+  const ItemLoadedState({required this.items});
 
   @override
-  List<Object?> get props => [item];
+  List<Object?> get props => [items];
 }
 
 final class ItemErrorState extends ItemState {

@@ -11,18 +11,18 @@ class ItemRepository {
 
   ItemRepository({required this.networkService});
 
-  Future<ItemEntity> getItem() async {
+  Future<List<ItemEntity>?> getItems() async {
     try {
       // throw Exception("It's LiiT");
-      final item = await networkService.getItem();
-      final data = item.body;
-      final temp = jsonDecode(data);
-      return ItemEntity(itemId: temp["itemId"], q:temp["q"]);
-      // return jsonDecode(data) as ItemEntity;
-      // final temp = jsonData.map((e) => ItemEntity.fromJson(e));
-      // return temp;
+      final items = await networkService.getItems();
+      final data = items.body;
+      final jsonData = jsonDecode(data) as List;
+      final temp = jsonData.map((e) => ItemEntity.fromJson(e)).toList();
+      return temp;
     } catch (e) {
-      return ItemEntity(itemId: 1, q: 'FAKE');
+      return [
+        ItemEntity(itemId: 1, q: 'FAKE')
+      ];
     }
   }
 }

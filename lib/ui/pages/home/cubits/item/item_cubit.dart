@@ -15,15 +15,15 @@ class ItemCubit extends Cubit<ItemState> {
 
   Future<ItemEntity?> getItem() async {
     try {
-      final item = await itemRepository.getItem();
+      final items = await itemRepository.getItems();
 
       emit(const ItemInitialState());
       // emit(ItemLoadingState());
 
       // itemRepository.getItems().then((items) {
-        if (item != null) {
+        if (items != null) {
           emit(ItemLoadingState());
-          emit(ItemLoadedState(item: item));
+          emit(ItemLoadedState(items: items));
         } else {
           emit(const ItemErrorState(errorMessage: 'cannot get items'));
         }
