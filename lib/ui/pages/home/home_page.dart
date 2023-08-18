@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_app/ui/pages/home/cubits/post/post_cubit.dart';
+import 'package:test_app/ui/pages/home/cubits/item/item_cubit.dart';
+// import 'package:test_app/ui/pages/home/cubits/music/music_cubit.dart';
 import 'package:test_app/ui/pages/home/helper_functions.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,7 +9,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final postContoller = BlocProvider.of<PostCubit>(context);
+    // final musicController = BlocProvider.of<MusicCubit>(context);
+    final itemController = BlocProvider.of<ItemCubit>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -18,29 +21,53 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-            child: BlocBuilder<PostCubit, PostState>(
+            child: BlocBuilder<ItemCubit, ItemState>(
               builder: (context, state) {
-                if (state is PostInitial) {
+                if (state is ItemInitialState) {
                   return buildInitialInput(
                       context: context,
                       state: state,
-                      postController: postContoller);
-                } else if (state is PostLoading) {
+                      itemContoller: itemController);
+                } else if (state is ItemLoadingState) {
                   return buildLoading();
-                } else if (state is PostLoaded) {
-                  final posts = state.post;
+                } 
+                else if (state is ItemLoadedState) {
+
                   return buildLoaded(
                       context: context,
                       state: state,
-                      postController: postContoller,
-                      posts: posts);
-                } else if (state is PostError) {
+                      itemController: itemController,);
+                } 
+                else if (state is ItemErrorState) {
                   return buildError(state: state);
                 } else {
-                  return buildError(state: state);
+                  return buildLoading();
                 }
               },
             ),
+            // child: BlocBuilder<MusicCubit, MusicState>(
+            //   builder: (context, state) {
+            //     if (state is MusicInitialState) {
+            //       return buildInitialInput(
+            //           context: context,
+            //           state: state,
+            //           musicController: musicController);
+            //     } else if (state is MusicLoadingState) {
+            //       return buildLoading();
+            //     } else if (state is MusicLoadedState) {
+            //       final music = state.music;
+            //       return buildLoaded(
+            //           context: context,
+            //           state: state,
+            //           musicController: musicController,
+            //           music: music);
+            //     } else if (state is MusicErrorState) {
+            //       return buildError(state: state);
+            //     } else {
+            //       return buildError(state: state);
+            //     }
+            //   },
+            // ),
           ),
         ),
       ),

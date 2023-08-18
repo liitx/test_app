@@ -3,15 +3,15 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-class NetworkService {
+class MusicNetworkService {
   // final baseUrl = 'jsonplaceholder.typicode.com';
   final baseUrl = 'https://api.publicapis.org/entries';
 
-  Future<Response> fetchPost() async {
+  Future<Response> getMusic() async {
     late final Response
         response; // late: it's going to be assigned later, which later it will not be null.
     try {
-      final uri = Uri.https(baseUrl, '/posts');
+      final uri = Uri.https(baseUrl, '/music');
       response = await http.get(uri);
     } catch (e) {
       log('NetworkService fetch catch: ${e.toString()}');
@@ -19,11 +19,11 @@ class NetworkService {
     return response;
   }
 
-  Future<Response> deletePost(int id) async {
+  Future<Response> deleteMusic(int id) async {
     late final Response
         response; // late: it's going to be assigned later, which later it will not be null.
     try {
-      final uri = Uri.https(baseUrl, '/post/$id');
+      final uri = Uri.https(baseUrl, '/music/$id');
       log(id.toString());
       response = await http.delete(uri);
     } catch (e) {

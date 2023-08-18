@@ -1,4 +1,4 @@
-class ViewPostModel {
+class MusicModel {
   final int? userId;
   final int? id;
   final String? title;
@@ -6,7 +6,7 @@ class ViewPostModel {
   final bool? isFavorite;
   final bool? isDelete;
 
-  ViewPostModel(
+  MusicModel(
       {this.userId,
       this.id,
       this.title,
@@ -14,9 +14,11 @@ class ViewPostModel {
       this.isFavorite,
       this.isDelete});
 
-  ViewPostModel copyWith({
+  MusicModel copyWith({
     bool? isFavorite,
     bool? isDelete,
   }) =>
-      ViewPostModel(isFavorite: isFavorite ?? this.isFavorite, isDelete: isDelete ?? this.isDelete);
+      MusicModel(
+          isFavorite: isFavorite ?? this.isFavorite,
+          isDelete: isDelete ?? this.isDelete);
 }
